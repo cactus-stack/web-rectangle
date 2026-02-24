@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Respiración Box y 4-7-8 para la Ansiedad — Respira</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Guía interactiva de técnicas de respiración para la ansiedad: Box Breathing (4·4·4·4) y método 4·7·8. Sesiones guiadas con animación. Gratis, sin anuncios." />
+  <meta name="keywords"    content="técnicas de respiración para la ansiedad, box breathing, respiración 4-7-8, ejercicio de respiración, ansiedad, estrés, respiración para dormir" />
+  <meta name="author"      content="Respira" />
+  <meta name="robots"      content="index, follow" />
+  <link rel="canonical"    href="https://TU-DOMINIO.vercel.app/" />
+
+  <!-- Open Graph (WhatsApp, Telegram, Facebook) -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://TU-DOMINIO.vercel.app/" />
+  <meta property="og:title"       content="Respiración Box y 4-7-8 para la Ansiedad — Respira" />
+  <meta property="og:description" content="Sesiones de box breathing y 4·7·8 guiadas con animación. Reduce la ansiedad en minutos. Gratis." />
+  <meta property="og:image"       content="https://TU-DOMINIO.vercel.app/og-image.png" />
+  <meta property="og:locale"      content="es" />
+  <meta property="og:site_name"   content="Respira" />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Respiración Box y 4-7-8 para la Ansiedad — Respira" />
+  <meta name="twitter:description" content="Sesiones de box breathing y 4·7·8 guiadas con animación. Reduce la ansiedad en minutos." />
+  <meta name="twitter:image"       content="https://TU-DOMINIO.vercel.app/og-image.png" />
+
+  <!-- PWA / Browser UI -->
+  <meta name="theme-color" content="#07091a" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='10' width='80' height='80' rx='12' fill='none' stroke='%236ee7f7' stroke-width='8'/></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root { --bg: #07091a; --rect-w: 300px; --rect-h: 300px; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+      gap: 28px;
+      color: #fff;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 30% 40%, rgba(110,231,247,.06) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 70% 65%, rgba(167,139,250,.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Particles ── */
+    .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .p {
+      position: absolute; border-radius: 50%; opacity: 0;
+      animation: p-float var(--pd) ease-in infinite var(--pdy);
+    }
+    @keyframes p-float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      8%   { opacity: .5; }
+      92%  { opacity: .2; }
+      100% { transform: translateY(-8vh) scale(1); opacity: 0; }
+    }
+
+    /* ── Bg breathe ── */
+    .bg-breathe {
+      position: fixed; inset: -20%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(110,231,247,.04) 0%, transparent 60%);
+      transform: scale(.8); transition: transform 4s ease-in-out; pointer-events: none;
+    }
+
+    /* ── Screens ── */
+    .screen {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 24px; width: 100%; max-width: 480px; padding: 0 24px;
+    }
+    .screen.hidden { display: none; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim   { animation: fade-up .55s both; }
+    .anim-1 { animation-delay: .08s; }
+    .anim-2 { animation-delay: .2s;  }
+    .anim-3 { animation-delay: .32s; }
+    .anim-4 { animation-delay: .44s; }
+    .anim-5 { animation-delay: .56s; }
+
+    /* ── Header ── */
+    .header { text-align: center; }
+    .header h1 {
+      font-size: 1.25rem; font-weight: 300;
+      letter-spacing: .3em; text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+    .header h2 {
+      font-size: .68rem; letter-spacing: .14em;
+      color: rgba(255,255,255,.22); margin-top: 5px; text-transform: uppercase;
+    }
+
+    /* ── Technique tabs ── */
+    .tabs {
+      display: flex; gap: 0; border-radius: 50px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      overflow: hidden;
+    }
+    .tab {
+      flex: 1; padding: 10px 22px; border: none; background: transparent;
+      color: rgba(255,255,255,.35); font-size: .78rem; letter-spacing: .12em;
+      text-transform: uppercase; cursor: pointer; transition: all .25s;
+      white-space: nowrap;
+    }
+    .tab:hover { color: rgba(255,255,255,.65); }
+    .tab.active {
+      background: rgba(110,231,247,.14);
+      color: #6ee7f7;
+      box-shadow: inset 0 0 20px rgba(110,231,247,.08);
+    }
+    .tab-hint {
+      font-size: .63rem; letter-spacing: .08em;
+      color: rgba(255,255,255,.18); text-align: center; margin-top: -8px;
+    }
+
+    /* ── Level selector ── */
+    .levels { display: flex; gap: 10px; width: 100%; }
+    .level-btn {
+      flex: 1; padding: 12px 6px;
+      border: 1px solid rgba(255,255,255,.1); border-radius: 14px;
+      background: rgba(255,255,255,.03); color: rgba(255,255,255,.45);
+      font-size: .68rem; letter-spacing: .08em; text-transform: uppercase;
+      cursor: pointer; transition: all .22s;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .level-btn .lv-name   { font-size: .82rem; font-weight: 600; }
+    .level-btn .lv-cycles { font-size: .62rem; opacity: .65; }
+    .level-btn .lv-time   { font-size: .6rem;  opacity: .45; }
+    .level-btn:hover {
+      background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22);
+      color: rgba(255,255,255,.8); transform: translateY(-2px);
+    }
+    .level-btn.selected {
+      background: rgba(110,231,247,.11); border-color: rgba(110,231,247,.45);
+      color: #6ee7f7; box-shadow: 0 0 18px rgba(110,231,247,.12);
+    }
+    .level-btn.selected .lv-cycles,
+    .level-btn.selected .lv-time { opacity: .8; }
+
+    /* ── Main CTA button ── */
+    .btn {
+      padding: 13px 50px;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 50px;
+      background: linear-gradient(135deg, rgba(110,231,247,.16), rgba(167,139,250,.16));
+      color: #fff; font-size: .86rem; letter-spacing: .2em; text-transform: uppercase;
+      cursor: pointer; backdrop-filter: blur(10px); transition: all .22s;
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, rgba(110,231,247,.3), rgba(167,139,250,.3));
+      box-shadow: 0 0 28px rgba(110,231,247,.18); transform: scale(1.04);
+    }
+    .btn:active { transform: scale(.97); }
+
+    /* ── Rectangle scene ── */
+    .scene {
+      position: relative; width: var(--rect-w); height: var(--rect-h); flex-shrink: 0;
+    }
+    .box {
+      position: absolute; inset: 0; border-radius: 20px;
+      border: 2px solid rgba(255,255,255,.1);
+      box-shadow: 0 0 60px rgba(110,231,247,.03), inset 0 0 40px rgba(110,231,247,.02);
+    }
+    /* dim the bottom side for 4-7-8 mode */
+    .scene.mode-478 #sBotom { opacity: .25; }
+
+    .side {
+      position: absolute; border-radius: 20px;
+      background: transparent; transition: background .3s, box-shadow .3s, opacity .5s;
+    }
+    .side-top    { top: -1px;    left: 20px;  right: 20px;  height: 2px; }
+    .side-right  { top: 20px;   right: -1px; bottom: 20px; width: 2px; }
+    .side-bottom { bottom: -1px; left: 20px;  right: 20px;  height: 2px; }
+    .side-left   { top: 20px;   left: -1px;  bottom: 20px; width: 2px; }
+    .side.active {
+      background: var(--phase-color);
+      box-shadow: 0 0 12px var(--phase-color), 0 0 28px var(--phase-color);
+    }
+
+    .corner {
+      position: absolute; width: 10px; height: 10px;
+      border-radius: 50%; border: 2px solid rgba(255,255,255,.18);
+    }
+    .corner:nth-child(1) { top: -5px;    left: -5px; }
+    .corner:nth-child(2) { top: -5px;    right: -5px; }
+    .corner:nth-child(3) { bottom: -5px; left: -5px; }
+    .corner:nth-child(4) { bottom: -5px; right: -5px; }
+
+    .dot {
+      position: absolute; width: 16px; height: 16px; border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 0 14px #fff, 0 0 36px rgba(255,255,255,.45);
+      transform: translate(-50%, -50%); z-index: 10;
+    }
+    .dot.teleport { transition: none !important; }
+
+    .label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 6px;
+      pointer-events: none;
+    }
+    .label-action {
+      font-size: 1.35rem; font-weight: 600; letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--phase-color, rgba(255,255,255,.35));
+      text-shadow: 0 0 20px var(--phase-color, transparent);
+      transition: color .32s, text-shadow .32s;
+    }
+    .label-timer {
+      font-size: 2.4rem; font-weight: 200;
+      color: rgba(255,255,255,.8); font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Progress ── */
+    .progress-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100%;
+    }
+    .progress-info {
+      display: flex; justify-content: space-between; width: 100%;
+      font-size: .68rem; letter-spacing: .12em;
+      color: rgba(255,255,255,.28); text-transform: uppercase;
+    }
+    .progress-info .lit { color: rgba(110,231,247,.65); }
+    .progress-track {
+      width: 100%; height: 3px; border-radius: 10px;
+      background: rgba(255,255,255,.07); overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 10px;
+      background: linear-gradient(90deg, #6ee7f7, #a78bfa);
+      width: 0%; transition: width .6s ease;
+      box-shadow: 0 0 8px rgba(110,231,247,.45);
+    }
+    .cycle-dots {
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; max-width: 340px;
+    }
+    .cdot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+      transition: all .38s;
+    }
+    .cdot.done    { background: #6ee7f7; border-color: #6ee7f7; box-shadow: 0 0 6px #6ee7f7; }
+    .cdot.current { background: rgba(110,231,247,.35); border-color: #6ee7f7; transform: scale(1.3); }
+
+    /* ── Phase progress bar (inside rect) ── */
+    .phase-bar-wrap {
+      position: absolute; bottom: 14px; left: 20px; right: 20px; height: 2px;
+      background: rgba(255,255,255,.06); border-radius: 4px; overflow: hidden;
+    }
+    .phase-bar {
+      height: 100%; width: 0%; border-radius: 4px;
+      background: var(--phase-color, #fff);
+      box-shadow: 0 0 6px var(--phase-color, #fff);
+    }
+
+    /* ── Stop btn ── */
+    .btn-stop {
+      padding: 9px 30px; border: 1px solid rgba(255,255,255,.1); border-radius: 50px;
+      background: transparent; color: rgba(255,255,255,.3);
+      font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+      cursor: pointer; transition: all .22s;
+    }
+    .btn-stop:hover { color: rgba(255,255,255,.65); border-color: rgba(255,255,255,.28); }
+
+    /* ── Done screen ── */
+    .done-icon  { font-size: 2.8rem; line-height: 1; }
+    .done-title {
+      font-size: 1.3rem; font-weight: 300; letter-spacing: .25em;
+      text-transform: uppercase; color: #6ee7b7;
+      text-shadow: 0 0 28px rgba(110,231,183,.4);
+    }
+    .done-stats { display: flex; gap: 40px; }
+    .stat { text-align: center; display: flex; flex-direction: column; gap: 4px; }
+    .stat-val {
+      font-size: 1.9rem; font-weight: 200; color: rgba(255,255,255,.85);
+      font-variant-numeric: tabular-nums;
+    }
+    .stat-label { font-size: .62rem; letter-spacing: .15em; color: rgba(255,255,255,.28); text-transform: uppercase; }
+    .done-msg {
+      font-size: .78rem; color: rgba(255,255,255,.32); letter-spacing: .04em;
+      text-align: center; line-height: 1.65; max-width: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-breathe" id="bgBreath"></div>
+  <div class="particles"  id="particles"></div>
+
+  <!-- ── SCREEN 1: Inicio ── -->
+  <div class="screen" id="screenStart">
+
+    <div class="header anim anim-1">
+      <h1>Respira</h1>
+      <h2>técnicas de respiración para la ansiedad</h2>
+    </div>
+
+    <!-- Technique tabs -->
+    <div class="tabs anim anim-2" id="tabs">
+      <button class="tab active" data-tech="box" aria-label="Box Breathing: inhala 4, sostén 4, exhala 4, sostén 4 segundos">Box 4·4·4·4</button>
+      <button class="tab"        data-tech="478" aria-label="Técnica 4-7-8: inhala 4, sostén 7, exhala 8 segundos">4·7·8</button>
+    </div>
+    <p class="tab-hint anim anim-2" id="techHint">Relajación general &amp; enfoque diario</p>
+
+    <!-- Level selector (se actualiza con la técnica) -->
+    <div class="levels anim anim-3" id="levels"></div>
+
+    <button class="btn anim anim-4" id="btnStart">Comenzar</button>
+
+  </div>
+
+  <!-- ── SCREEN 2: Sesión activa ── -->
+  <div class="screen hidden" id="screenRun" role="main" aria-label="Sesión de respiración activa">
+
+    <div class="scene" id="scene">
+      <div class="box"></div>
+      <div class="corner"></div><div class="corner"></div>
+      <div class="corner"></div><div class="corner"></div>
+      <div class="side side-top"    id="sTop"></div>
+      <div class="side side-right"  id="sRight"></div>
+      <div class="side side-bottom" id="sBotom"></div>
+      <div class="side side-left"   id="sLeft"></div>
+      <div class="dot" id="dot"></div>
+      <div class="label">
+        <div class="label-action" id="action" aria-live="polite" aria-atomic="true">—</div>
+        <div class="label-timer"  id="timer">—</div>
+      </div>
+      <div class="phase-bar-wrap">
+        <div class="phase-bar" id="phaseBar"></div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span id="infoLeft">ciclo 0 / 0</span>
+        <span id="infoRight" class="lit">0:00</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="cycle-dots" id="cycleDots"></div>
+    </div>
+
+    <button class="btn-stop" id="btnStop">Detener sesión</button>
+
+  </div>
+
+  <!-- ── SCREEN 3: Completado ── -->
+  <div class="screen hidden" id="screenDone">
+    <div class="done-icon  anim anim-1">🌿</div>
+    <div class="done-title anim anim-2">Sesión completada</div>
+    <div class="done-stats anim anim-3">
+      <div class="stat">
+        <div class="stat-val"   id="doneTime">—</div>
+        <div class="stat-label">Tiempo total</div>
+      </div>
+      <div class="stat">
+        <div class="stat-val"   id="doneCycles">—</div>
+        <div class="stat-label">Ciclos</div>
+      </div>
+    </div>
+    <div class="done-msg anim anim-4" id="doneMsg"></div>
+    <button class="btn anim anim-5" id="btnRestart">Volver a respirar</button>
+  </div>
+
+  <script>
+    /* ────────────────────────────────────────
+       Particles
+    ──────────────────────────────────────── */
+    const pEl = document.getElementById('particles');
+    const pc  = ['#6ee7f7','#a78bfa','#6ee7b7','#f7a76e'];
+    for (let i = 0; i < 24; i++) {
+      const d = document.createElement('div');
+      d.className = 'p';
+      const sz = Math.random() * 5 + 2;
+      d.style.cssText = `
+        width:${sz}px;height:${sz}px;left:${Math.random()*100}%;
+        background:${pc[i%pc.length]};
+        --pd:${(Math.random()*10+8).toFixed(1)}s;
+        --pdy:-${(Math.random()*6).toFixed(1)}s;
+        filter:blur(${Math.random()<.4?1:0}px);
+      `;
+      pEl.appendChild(d);
+    }
+
+    /* ────────────────────────────────────────
+       Technique definitions
+    ──────────────────────────────────────── */
+    const TECHNIQUES = {
+      box: {
+        hint: 'Relajación general &amp; enfoque diario',
+        phases: [
+          { name: 'Inhala',  side: 'left',   color: '#6ee7f7', scale: 1.15, secs: 4 },
+          { name: 'Sostén',  side: 'top',    color: '#a78bfa', scale: 1.15, secs: 4 },
+          { name: 'Exhala',  side: 'right',  color: '#6ee7b7', scale: 0.85, secs: 4 },
+          { name: 'Sostén',  side: 'bottom', color: '#f7a76e', scale: 0.85, secs: 4 },
+        ],
+        // dot corners: bottom-left → top-left → top-right → bottom-right → (loop)
+        corners: [
+          { x: 0,   y: 100 },
+          { x: 0,   y: 0   },
+          { x: 100, y: 0   },
+          { x: 100, y: 100 },
+        ],
+        resetDot: false,
+        levels: [
+          { label: 'Leve',     cycles: 4,  time: '~1.5 min' },
+          { label: 'Moderada', cycles: 10, time: '~3 min'   },
+          { label: 'Fuerte',   cycles: 15, time: '~5 min'   },
+        ],
+        doneMsg: {
+          4:  'Bien hecho. Tu sistema nervioso ya está más tranquilo.',
+          10: 'Excelente sesión. Siente cómo tu cuerpo se ha relajado.',
+          15: 'Sesión completa. Has reseteado tu respuesta al estrés.',
+        },
+      },
+
+      '478': {
+        hint: 'Ansiedad aguda &amp; para conciliar el sueño',
+        phases: [
+          { name: 'Inhala',  side: 'left',  color: '#6ee7f7', scale: 1.15, secs: 4 },
+          { name: 'Sostén',  side: 'top',   color: '#a78bfa', scale: 1.15, secs: 7 },
+          { name: 'Exhala',  side: 'right', color: '#6ee7b7', scale: 0.85, secs: 8 },
+        ],
+        // uses only 3 sides; dot resets to bottom-left after each cycle
+        corners: [
+          { x: 0,   y: 100 }, // bottom-left → sube izquierda (Inhala 4s)
+          { x: 0,   y: 0   }, // top-left    → cruza arriba   (Sostén 7s)
+          { x: 100, y: 0   }, // top-right   → baja derecha   (Exhala 8s)
+          { x: 100, y: 100 }, // bottom-right (fin del ciclo → reset)
+        ],
+        resetDot: true, // teletransporta el punto al inicio al acabar cada ciclo
+        levels: [
+          { label: 'Estándar', cycles: 4, time: '~1.3 min' },
+          { label: 'Extendida',cycles: 8, time: '~2.5 min' },
+        ],
+        doneMsg: {
+          4: 'Tu sistema nervioso parasimpático está activo. Descansa.',
+          8: 'Sesión profunda completada. Deberías sentirte mucho más tranquilo.',
+        },
+      },
+    };
+
+    /* ────────────────────────────────────────
+       DOM
+    ──────────────────────────────────────── */
+    const bg           = document.getElementById('bgBreath');
+    const scene        = document.getElementById('scene');
+    const dot          = document.getElementById('dot');
+    const actionEl     = document.getElementById('action');
+    const timerEl      = document.getElementById('timer');
+    const phaseBar     = document.getElementById('phaseBar');
+    const infoLeft     = document.getElementById('infoLeft');
+    const infoRight    = document.getElementById('infoRight');
+    const progressFill = document.getElementById('progressFill');
+    const cycleDots    = document.getElementById('cycleDots');
+    const screenStart  = document.getElementById('screenStart');
+    const screenRun    = document.getElementById('screenRun');
+    const screenDone   = document.getElementById('screenDone');
+    const btnStart     = document.getElementById('btnStart');
+    const btnStop      = document.getElementById('btnStop');
+    const btnRestart   = document.getElementById('btnRestart');
+    const doneTime     = document.getElementById('doneTime');
+    const doneCycles   = document.getElementById('doneCycles');
+    const doneMsg      = document.getElementById('doneMsg');
+    const techHint     = document.getElementById('techHint');
+    const levelsEl     = document.getElementById('levels');
+
+    const sides = {
+      top:    document.getElementById('sTop'),
+      right:  document.getElementById('sRight'),
+      bottom: document.getElementById('sBotom'),
+      left:   document.getElementById('sLeft'),
+    };
+
+    /* ────────────────────────────────────────
+       State
+    ──────────────────────────────────────── */
+    let currentTech  = 'box';
+    let targetCycles = 4;
+    let running      = false;
+    let phaseIdx     = 0;
+    let cycles       = 0;
+    let animId       = null;
+    let startTime    = null;
+    let sessionStart = null;
+    let phaseBarAnim = null;
+
+    /* ────────────────────────────────────────
+       Start screen — technique tabs
+    ──────────────────────────────────────── */
+    document.getElementById('tabs').addEventListener('click', e => {
+      const tab = e.target.closest('.tab');
+      if (!tab) return;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentTech = tab.dataset.tech;
+      renderLevels();
+      techHint.innerHTML = TECHNIQUES[currentTech].hint;
+    });
+
+    function renderLevels() {
+      const tech = TECHNIQUES[currentTech];
+      levelsEl.innerHTML = '';
+      tech.levels.forEach((lv, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'level-btn' + (i === 0 ? ' selected' : '');
+        btn.dataset.cycles = lv.cycles;
+        btn.innerHTML = `
+          <span class="lv-name">${lv.label}</span>
+          <span class="lv-cycles">${lv.cycles} ciclos</span>
+          <span class="lv-time">${lv.time}</span>
+        `;
+        levelsEl.appendChild(btn);
+      });
+      targetCycles = tech.levels[0].cycles;
+    }
+    renderLevels();
+
+    levelsEl.addEventListener('click', e => {
+      const btn = e.target.closest('.level-btn');
+      if (!btn) return;
+      levelsEl.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      targetCycles = +btn.dataset.cycles;
+    });
+
+    /* ────────────────────────────────────────
+       Helpers
+    ──────────────────────────────────────── */
+    function setPhaseColor(c) { scene.style.setProperty('--phase-color', c); }
+    function clearSides()     { Object.values(sides).forEach(s => s.classList.remove('active')); }
+
+    function setDotPos(px, py, instant = false) {
+      const r = scene.getBoundingClientRect();
+      if (instant) dot.classList.add('teleport');
+      dot.style.left = (px / 100 * r.width)  + 'px';
+      dot.style.top  = (py / 100 * r.height) + 'px';
+      if (instant) requestAnimationFrame(() => dot.classList.remove('teleport'));
+    }
+
+    function lerp(a, b, t) { return a + (b - a) * t; }
+
+    function fmtTime(ms) {
+      const s = Math.floor(ms / 1000);
+      return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+    }
+
+    function buildDots() {
+      cycleDots.innerHTML = '';
+      for (let i = 0; i < targetCycles; i++) {
+        const d = document.createElement('div');
+        d.className = 'cdot'; d.id = `cd${i}`;
+        cycleDots.appendChild(d);
+      }
+    }
+
+    function updateProgress() {
+      progressFill.style.width = (cycles / targetCycles * 100) + '%';
+      infoLeft.textContent = `ciclo ${cycles} / ${targetCycles}`;
+      for (let i = 0; i < targetCycles; i++) {
+        const d = document.getElementById(`cd${i}`);
+        if (!d) continue;
+        d.classList.toggle('done',    i < cycles);
+        d.classList.toggle('current', i === cycles && running);
+      }
+    }
+
+    function updateClock() {
+      if (!running) return;
+      infoRight.textContent = fmtTime(Date.now() - sessionStart);
+      requestAnimationFrame(updateClock);
+    }
+
+    /* ────────────────────────────────────────
+       Screens
+    ──────────────────────────────────────── */
+    function showScreen(id) {
+      [screenStart, screenRun, screenDone].forEach(s => {
+        const show = s.id === id;
+        s.classList.toggle('hidden', !show);
+        if (show) {
+          s.querySelectorAll('.anim').forEach(el => {
+            el.style.animation = 'none';
+            el.offsetHeight;
+            el.style.animation = '';
+          });
+        }
+      });
+    }
+
+    /* ────────────────────────────────────────
+       Phase bar animation
+    ──────────────────────────────────────── */
+    function animatePhaseBar(durationSecs) {
+      cancelAnimationFrame(phaseBarAnim);
+      phaseBar.style.transition = 'none';
+      phaseBar.style.width = '0%';
+      phaseBar.offsetHeight; // reflow
+      phaseBar.style.transition = `width ${durationSecs}s linear`;
+      phaseBar.style.width = '100%';
+    }
+
+    /* ────────────────────────────────────────
+       Core animation engine
+    ──────────────────────────────────────── */
+    function tick(ts) {
+      if (!startTime) startTime = ts;
+
+      const tech    = TECHNIQUES[currentTech];
+      const ph      = tech.phases[phaseIdx];
+      const elapsed = (ts - startTime) / 1000;
+      const t       = Math.min(elapsed / ph.secs, 1);
+
+      // countdown timer
+      const remaining = Math.ceil(ph.secs - elapsed);
+      if (timerEl.textContent !== String(remaining)) timerEl.textContent = remaining;
+
+      // dot movement: from corner[phaseIdx] to corner[phaseIdx+1]
+      const from = tech.corners[phaseIdx];
+      const to   = tech.corners[phaseIdx + 1] ?? tech.corners[0];
+      setDotPos(lerp(from.x, to.x, t), lerp(from.y, to.y, t));
+
+      if (t < 1) {
+        animId = requestAnimationFrame(tick);
+      } else {
+        phaseIdx++;
+        const numPhases = tech.phases.length;
+
+        if (phaseIdx >= numPhases) {
+          // cycle complete
+          phaseIdx = 0;
+          cycles++;
+          updateProgress();
+
+          if (tech.resetDot) {
+            setDotPos(tech.corners[0].x, tech.corners[0].y, true);
+          }
+
+          if (cycles >= targetCycles) { finish(); return; }
+        }
+        startPhase();
+      }
+    }
+
+    function startPhase() {
+      const tech = TECHNIQUES[currentTech];
+      const ph   = tech.phases[phaseIdx];
+      clearSides();
+      sides[ph.side].classList.add('active');
+      setPhaseColor(ph.color);
+      actionEl.textContent = ph.name;
+      timerEl.textContent  = ph.secs;
+      bg.style.transition  = `transform ${ph.secs}s ease-in-out`;
+      bg.style.transform   = `scale(${ph.scale})`;
+      animatePhaseBar(ph.secs);
+      startTime = null;
+      animId = requestAnimationFrame(tick);
+    }
+
+    /* ────────────────────────────────────────
+       Session controls
+    ──────────────────────────────────────── */
+    function start() {
+      running      = true;
+      phaseIdx     = 0;
+      cycles       = 0;
+      sessionStart = Date.now();
+
+      // 4-7-8: dim bottom side
+      scene.classList.toggle('mode-478', currentTech === '478');
+
+      buildDots();
+      updateProgress();
+      showScreen('screenRun');
+
+      const tech = TECHNIQUES[currentTech];
+      setDotPos(tech.corners[0].x, tech.corners[0].y, true);
+      requestAnimationFrame(updateClock);
+      startPhase();
+    }
+
+    function stop() {
+      running = false;
+      cancelAnimationFrame(animId);
+      clearSides();
+      scene.style.removeProperty('--phase-color');
+      scene.classList.remove('mode-478');
+      phaseBar.style.width = '0%';
+      bg.style.transform = 'scale(0.8)';
+      showScreen('screenStart');
+    }
+
+    function finish() {
+      running = false;
+      cancelAnimationFrame(animId);
+      clearSides();
+      bg.style.transform = 'scale(1)';
+
+      const elapsed = Date.now() - sessionStart;
+      const msgs    = TECHNIQUES[currentTech].doneMsg;
+      doneTime.textContent   = fmtTime(elapsed);
+      doneCycles.textContent = targetCycles;
+      doneMsg.textContent    = msgs[targetCycles] ?? 'Bien hecho.';
+      showScreen('screenDone');
+    }
+
+    /* ────────────────────────────────────────
+       Events
+    ──────────────────────────────────────── */
+    btnStart.addEventListener('click',   start);
+    btnStop.addEventListener('click',    stop);
+    btnRestart.addEventListener('click', () => showScreen('screenStart'));
+
+    /* ── Init dot position ── */
+    setDotPos(0, 100, true);
+  </script>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Respira",
+    "description": "Aplicación interactiva de técnicas de respiración para la ansiedad: Box Breathing (4-4-4-4) y método 4-7-8. Sesiones guiadas con animación.",
+    "url": "https://TU-DOMINIO.vercel.app/",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "All",
+    "inLanguage": "es",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "keywords": "técnicas de respiración para la ansiedad, box breathing, respiración 4-7-8, ansiedad, estrés",
+    "featureList": [
+      "Box Breathing 4-4-4-4",
+      "Técnica de respiración 4-7-8",
+      "Sesiones guiadas con animación",
+      "Sin registro, sin anuncios"
+    ]
+  }
+  </script>
+</body>
+</html>
