@@ -33,7 +33,11 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root { --bg: #07091a; --rect-w: 300px; --rect-h: 300px; }
+    :root {
+      --bg: #07091a;
+      --rect-w: min(300px, calc(100vw - 48px));
+      --rect-h: min(300px, calc(100vw - 48px));
+    }
 
     body {
       min-height: 100vh;
@@ -156,6 +160,12 @@
     .level-btn.selected .lv-cycles,
     .level-btn.selected .lv-time { opacity: .8; }
 
+    /* ── Touch targets ── */
+    .btn, .btn-stop, .level-btn, .tab {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
     /* ── Main CTA button ── */
     .btn {
       padding: 13px 50px;
@@ -172,7 +182,7 @@
 
     /* ── Rectangle scene ── */
     .scene {
-      position: relative; width: var(--rect-w); height: var(--rect-h); flex-shrink: 0;
+      position: relative; width: var(--rect-w); height: var(--rect-h);
     }
     .box {
       position: absolute; inset: 0; border-radius: 20px;
@@ -298,6 +308,34 @@
     .done-msg {
       font-size: .78rem; color: rgba(255,255,255,.32); letter-spacing: .04em;
       text-align: center; line-height: 1.65; max-width: 300px;
+    }
+    /* ── Responsive: pantallas angostas (≤ 390px) ── */
+    @media (max-width: 390px) {
+      body { gap: 20px; }
+      .screen { padding: 0 16px; gap: 18px; }
+      .tab { padding: 10px 14px; font-size: .72rem; }
+      .level-btn { padding: 10px 4px; }
+      .level-btn .lv-name { font-size: .76rem; }
+    }
+
+    /* ── Responsive: pantallas cortas (landscape, iPhone SE) ── */
+    @media (max-height: 640px) {
+      body { gap: 14px; }
+      :root {
+        --rect-w: min(220px, calc(100vw - 48px));
+        --rect-h: min(220px, calc(100vw - 48px));
+      }
+      .label-action { font-size: 1.1rem; }
+      .label-timer  { font-size: 1.9rem; }
+    }
+
+    /* ── Solo activar hover en dispositivos que lo soporten ── */
+    @media (hover: none) {
+      .btn:hover, .btn-stop:hover,
+      .level-btn:hover, .tab:hover {
+        transform: none !important;
+        box-shadow: none !important;
+      }
     }
   </style>
 </head>
