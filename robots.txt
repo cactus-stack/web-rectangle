@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://TU-DOMINIO.vercel.app/sitemap.xml
+Sitemap: https://web-rectangle.vercel.app/sitemap.xml
